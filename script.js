@@ -48,3 +48,14 @@ document.addEventListener("keydown", function (event) {
         clearDisplay();
     }
 });
+
+window.onload = function () {
+
+    const savedHistory = localStorage.getItem("history");
+
+    if (savedHistory) {
+        historyList.innerHTML = savedHistory;
+    }
+
+}
+
