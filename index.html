@@ -1,66 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 <body>
 
+<div class="container">
+
+    <h1>JavaScript Calculator</h1>
+
     <button id="theme-btn">🌙 Dark Mode</button>
-<div class="calculator">
 
-    <input type="text" id="display" readonly>
+    <div class="calculator">
 
-    <div class="buttons">
+        <input type="text" id="display" readonly>
 
-        <button onclick="clearDisplay()">AC</button>
-        <button onclick="deleteLast()">DEL</button>
-        <button onclick="append('%')">%</button>
-        <button onclick="append('/')">/</button>
+        <div class="buttons">
 
-        <button onclick="append('7')">7</button>
-        <button onclick="append('8')">8</button>
-        <button onclick="append('9')">9</button>
-        <button onclick="append('*')">*</button>
+            <button onclick="clearDisplay()">AC</button>
+            <button onclick="deleteLast()">DEL</button>
+            <button onclick="append('%')">%</button>
+            <button onclick="append('/')">/</button>
 
-        <button onclick="append('4')">4</button>
-        <button onclick="append('5')">5</button>
-        <button onclick="append('6')">6</button>
-        <button onclick="append('-')">-</button>
+            <button onclick="append('7')">7</button>
+            <button onclick="append('8')">8</button>
+            <button onclick="append('9')">9</button>
+            <button onclick="append('*')">*</button>
 
-        <button onclick="append('1')">1</button>
-        <button onclick="append('2')">2</button>
-        <button onclick="append('3')">3</button>
-        <button onclick="append('+')">+</button>
+            <button onclick="append('4')">4</button>
+            <button onclick="append('5')">5</button>
+            <button onclick="append('6')">6</button>
+            <button onclick="append('-')">-</button>
 
-        <button onclick="append('0')">0</button>
-        <button onclick="append('.')">.</button>
-        <button onclick="calculate()">=</button>
+            <button onclick="append('1')">1</button>
+            <button onclick="append('2')">2</button>
+            <button onclick="append('3')">3</button>
+            <button onclick="append('+')">+</button>
 
-        <button onclick="square()">x²</button>
-        <button onclick="sqrt()">√</button>
-        <button onclick="reciprocal()">1/x</button>
-        <button onclick="append(Math.PI)">π</button>
-        <button onclick="append(Math.E)">e</button>
+            <button onclick="append('0')">0</button>
+            <button onclick="append('.')">.</button>
+            <button onclick="calculate()">=</button>
 
-        <button onclick="sin()">sin</button>
-        <button onclick="cos()">cos</button>
-        <button onclick="tan()">tan</button>
-        <button onclick="log()">log</button>
-        <button onclick="ln()">ln</button>
-        <button onclick="factorial()">x!</button>
+            <button onclick="square()">x²</button>
+            <button onclick="sqrt()">√</button>
+            <button onclick="reciprocal()">1/x</button>
+            <button onclick="append(Math.PI)">π</button>
+            <button onclick="append(Math.E)">e</button>
+
+            <button onclick="sin()">sin</button>
+            <button onclick="cos()">cos</button>
+            <button onclick="tan()">tan</button>
+            <button onclick="log()">log</button>
+            <button onclick="ln()">ln</button>
+            <button onclick="factorial()">x!</button>
+
+        </div>
+
     </div>
 
-</div>
+    <div class="history-container">
+        <h3>History</h3>
+        <ul id="history"></ul>
+    </div>
 
-<div class="history-container">
-    <h3>History</h3>
-    <ul id="history"></ul>
 </div>
 
 <script src="script.js"></script>
 
 </body>
-</html>

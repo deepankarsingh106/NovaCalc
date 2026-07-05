@@ -121,6 +121,12 @@ button:hover{
 
 }
 
+button:active{
+
+    transform:scale(.92);
+
+} 
+
 .history-container{
 
     margin-top:25px;

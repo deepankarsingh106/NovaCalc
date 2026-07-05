@@ -79,6 +79,13 @@ function factorial(){
     display.value = ans;
 }
 
+//function to implement the clear History
+function clearHistory(){
+    historyList.innerHTML="";
+    localStorage.removeItem("history");
+}
+
+
 //function to calculate 
 function calculate(){
     try{
