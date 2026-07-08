@@ -204,6 +204,21 @@
         }
     };
 
+    const backspace = () => {
+    if (shouldResetDisplay || currentValue === "Error") return;
+
+    currentValue =
+        currentValue.length === 1
+        ? "0"
+        : currentValue.slice(0, -1);
+
+    if (currentValue === "-" || currentValue === "")
+        currentValue = "0";
+
+    updateDisplay();
+    };
+
+
     keypad.addEventListener("click", (e) => {
         const btn = e.target.closest(".key");
         if (!btn) return;
@@ -220,7 +235,7 @@
         "+": ["operator", "+"], "-": ["operator", "-"],
         "*": ["operator", "*"], "/": ["operator", "/"],
         "Enter": ["equals"], "=": ["equals"],
-        "Escape": ["clear"], "Backspace": ["clear"],
+        "Escape": ["clear"], "Backspace": ["backspace"],
         "%": ["percent"],
         };
 
