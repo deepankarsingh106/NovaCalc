@@ -32,7 +32,7 @@
 ### ⌨️ Keyboard Support
 
 <p align="center">
-  <img src="assests/Screenshots/Keyboard.png" alt="NovaCalc Keyboard Support" width="800">
+  <img src="assests/Screenshots/KeyBoard.png" alt="NovaCalc Keyboard Support" width="800">
 </p>
 
 ---
