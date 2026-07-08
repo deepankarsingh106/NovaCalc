@@ -16,6 +16,7 @@
         .forEach(btn => btn.classList.remove("active"));
     };
 
+
     const formatDisplay = (value) => {
         if (value === "Error") return value;
         const num = parseFloat(value);
@@ -122,6 +123,7 @@
         }
     };
 
+    
     const setOperator = (op) => {
         if (currentValue === "Error") return;
 
@@ -139,7 +141,6 @@
         }
         currentValue = String(result);
     }
-
         previousValue = currentValue;
         operator = op;
         shouldResetDisplay = true;
