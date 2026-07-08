@@ -48,6 +48,8 @@
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
 </p>
 
+---
+
 ## 📂 Project Structure & Layouts
 
 NovaCalc follows a modular architecture where each file has a single responsibility. 
@@ -117,7 +119,6 @@ cd NovaCalc
 ## License & Attributions
 
 - **Deepankar Singh**
-- Powered By Cursor,Claude.
 - This project is licensed under the MIT License.
 
 Feel free to use, modify, and distribute this project under the terms of the MIT License.
