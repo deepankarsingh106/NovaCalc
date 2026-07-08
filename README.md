@@ -118,7 +118,7 @@ cd NovaCalc
 
 ## License & Attributions
 
-- **Deepankar Singh**
+- Built by **Deepankar Singh**
 - This project is licensed under the MIT License.
 
 Feel free to use, modify, and distribute this project under the terms of the MIT License.
