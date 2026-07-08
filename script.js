@@ -10,6 +10,13 @@
     let operator = null;
     let shouldResetDisplay = false;
 
+    const clearActiveOperators = () => {
+        document
+        .querySelectorAll(".key-op.active")
+        .forEach(btn => btn.classList.remove("active"));
+    };
+
+    
     const formatDisplay = (value) => {
         if (value === "Error") return value;
         const num = parseFloat(value);
@@ -183,6 +190,7 @@
         btn.appendChild(el);
         el.addEventListener("animationend", () => el.remove());
     };
+
 
     const flashKey = (btn) => {
         btn.classList.add("pressed");
