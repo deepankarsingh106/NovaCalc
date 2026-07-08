@@ -38,7 +38,7 @@
     --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-/* ─── Reset & base ─── */
+/*Reset & base*/
 *,
 *::before,
 *::after {
@@ -65,7 +65,7 @@ body {
     position: relative;
 }
 
-/* ─── Animated ambient background ─── */
+/*Animated ambient background*/
 .ambient {
     position: fixed;
     border-radius: 50%;
@@ -73,6 +73,7 @@ body {
     pointer-events: none;
     z-index: 0;
     animation: float 12s ease-in-out infinite;
+    will-change: transform;
 }
 
 .ambient-1 {
@@ -293,7 +294,9 @@ body {
     text-align: right;
     color: var(--text-primary);
     transition: transform var(--transition-fast), opacity var(--transition-fast);
-    word-break: break-all;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
     max-width: 100%;
 }
 
