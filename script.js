@@ -16,7 +16,6 @@
         .forEach(btn => btn.classList.remove("active"));
     };
 
-    
     const formatDisplay = (value) => {
         if (value === "Error") return value;
         const num = parseFloat(value);
@@ -65,7 +64,7 @@
         previousValue = "";
         operator = null;
         shouldResetDisplay = false;
-        document.querySelectorAll(".key-op.active").forEach((k) => k.classList.remove("active"));
+        clearActiveOperators().forEach((k) => k.classList.remove("active"));
         updateHistory();
         updateDisplay();
     };
@@ -126,7 +125,7 @@
     const setOperator = (op) => {
         if (currentValue === "Error") return;
 
-        document.querySelectorAll(".key-op.active").forEach((k) => k.classList.remove("active"));
+        clearActiveOperators().forEach((k) => k.classList.remove("active"));
 
         if (operator && !shouldResetDisplay) {
             const result = calculate(previousValue, currentValue, operator);
@@ -172,7 +171,7 @@
         previousValue = "";
         operator = null;
         shouldResetDisplay = true;
-        document.querySelectorAll(".key-op.active").forEach((k) => k.classList.remove("active"));
+        clearActiveOperators().forEach((k) => k.classList.remove("active"));
         updateDisplay(true);
     };
 
