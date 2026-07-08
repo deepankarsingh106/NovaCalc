@@ -90,7 +90,7 @@ NovaCalc/
 | Escape | Clear Calculator |
 | % | Percentage |
 
-   --- 
+  --- 
 
 ## 🚀 Getting Started
 
@@ -112,7 +112,7 @@ cd NovaCalc
 
 * Or use **Live Server** in VS Code.
 
-  ---
+---
 
 ## License & Attributions
 
@@ -122,4 +122,5 @@ cd NovaCalc
 
 Feel free to use, modify, and distribute this project under the terms of the MIT License.
 
+---
 
