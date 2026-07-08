@@ -377,7 +377,7 @@ body {
 
 .key:active,
 .key.pressed {
-    transform: scale(0.93);
+    transform: scale(0.96);
 }
 
 .key:focus-visible {
@@ -438,7 +438,7 @@ body {
 }
 
 .key-op.active {
-    background: linear-gradient(145deg, rgba(139, 92, 246, 0.55), rgba(34, 211, 238, 0.35));
+    background: linear-gradient(145deg, rgba(127, 85, 227, 0.55), rgba(34, 211, 238, 0.35));
     border-color: rgba(139, 92, 246, 0.5);
     color: white;
     box-shadow:
