@@ -22,15 +22,10 @@
 ## 📸 Screenshots
 
 ### 🖥️ Desktop View
-
 <p align="center">
   <img src="assests/Screenshots/DeskTop_View.png" alt="NovaCalc Desktop View" width="800">
 </p>
-
 ---
-
-### ⌨️ Keyboard Support
-
 <p align="center">
   <img src="assests/Screenshots/KeyBoard.png" alt="NovaCalc Keyboard Support" width="800">
 </p>
