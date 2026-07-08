@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nova — Calculator</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NovaCalc</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="ambient ambient-1"></div>
-  <div class="ambient ambient-2"></div>
-  <div class="ambient ambient-3"></div>
-  <div class="grid-overlay"></div>
+    <div class="ambient ambient-1"  aria-hidden="true"></div>
+    <div class="ambient ambient-2"  aria-hidden="true"></div>
+    <div class="ambient ambient-3"  aria-hidden="true"></div>
+    <div class="grid-overlay"  aria-hidden="true"></div>
 
-  <main class="app">
+    <main class="app">
     <header class="brand">
-      <div class="brand-icon" aria-hidden="true">
+        <div class="brand-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none">
-          <rect x="4" y="2" width="16" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/>
-          <circle cx="8" cy="7" r="1" fill="currentColor"/>
-          <circle cx="12" cy="7" r="1" fill="currentColor"/>
-          <circle cx="16" cy="7" r="1" fill="currentColor"/>
-          <rect x="7" y="11" width="10" height="2" rx="1" fill="currentColor"/>
-          <rect x="7" y="15" width="6" height="2" rx="1" fill="currentColor"/>
+            <rect x="4" y="2" width="16" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="8" cy="7" r="1" fill="currentColor"/>
+            <circle cx="12" cy="7" r="1" fill="currentColor"/>
+            <circle cx="16" cy="7" r="1" fill="currentColor"/>
+            <rect x="7" y="11" width="10" height="2" rx="1" fill="currentColor"/>
+            <rect x="7" y="15" width="6" height="2" rx="1" fill="currentColor"/>
         </svg>
-      </div>
-      <div>
+        </div>
+        <div>
         <h1>NovaCalc</h1>
         <p>Precision at your fingertips</p>
-      </div>
+        </div>
     </header>
 
     <section class="calculator" aria-label="Calculator">
-      <div class="display-panel">
+        <div class="display-panel">
         <div class="history" id="history" aria-live="polite"></div>
         <div class="display-row">
-          <output class="display" id="display" for="calc-keys">0</output>
+            <output
+                    class="display"
+                    id="display"
+                    aria-label="Calculator display"
+                >0</output>
         </div>
         <div class="mode-indicator">
-          <span class="dot"></span>
-          Standard
+            <span class="dot"></span>
+            Standard
         </div>
-      </div>
+    </div>
 
-      <div class="keypad" id="calc-keys" role="group" aria-label="Calculator keys">
+    <div class="keypad" id="calc-keys" role="group" aria-label="Calculator keys">
         <button type="button" class="key key-fn" data-action="clear" aria-label="Clear">AC</button>
         <button type="button" class="key key-fn" data-action="toggle-sign" aria-label="Toggle sign">±</button>
         <button type="button" class="key key-fn" data-action="percent" aria-label="Percent">%</button>
@@ -69,16 +74,16 @@
         <button type="button" class="key key-num key-zero" data-action="digit" data-value="0">0</button>
         <button type="button" class="key key-num" data-action="decimal" aria-label="Decimal point">.</button>
         <button type="button" class="key key-equals" data-action="equals" aria-label="Equals">=</button>
-      </div>
+        </div>
     </section>
 
     <footer class="footer">
-      <span>Keyboard supported</span>
-      <span class="sep">·</span>
-      <span>Designed with CSS magic</span>
+        <span>Keyboard supported</span>
+        <span class="sep">·</span>
+        <span>Built with HTML • CSS • JavaScript</span>
     </footer>
-  </main>
+    </main>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
