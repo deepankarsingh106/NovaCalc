@@ -50,7 +50,15 @@
 
 ## 📂 Project Structure & Layouts
 
-NovaCalc follows a modular architecture where each file has a single responsibility. The HTML file defines the user interface, the CSS file handles the visual design, responsiveness, and animations, while the JavaScript file powers the calculator engine, keyboard shortcuts, display formatting, and interaction logic. This clear separation of structure, styling, and functionality improves readability, maintainability, and future scalability.
+NovaCalc follows a modular architecture where each file has a single responsibility. 
+- index.html
+  This HTML file defines the user interface, t
+- style.css
+  This CSS file handles the visual design, responsiveness, and animations, while
+- Script.js
+  The JavaScript file powers the calculator engine, keyboard shortcuts, display formatting, and interaction logic.
+
+This clear separation of structure, styling, and functionality improves readability, maintainability, and future scalability.
 
 
 ```text
