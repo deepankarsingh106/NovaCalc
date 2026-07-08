@@ -1,150 +1,239 @@
-// basic functioning of the Calculator
-const historyList = document.getElementById("history");
+(() => {
+  "use strict";
 
-const display = document.getElementById("display");
+  const display = document.getElementById("display");
+  const historyEl = document.getElementById("history");
+  const keypad = document.getElementById("calc-keys");
 
-// function to add history value to  current
-function append(value){
-    display.value += value;
-}
+  let currentValue = "0";
+  let previousValue = "";
+  let operator = null;
+  let shouldResetDisplay = false;
 
-// function to clear history
-function clearDisplay(){
-    display.value = "";
-}
+  const formatDisplay = (value) => {
+    if (value === "Error") return value;
+    const num = parseFloat(value);
+    if (Number.isNaN(num)) return "0";
+    if (!Number.isFinite(num)) return "Error";
 
-// function to delete the last input
-function deleteLast(){
-    display.value = display.value.slice(0,-1);
-}
-// function to save the history
-function saveHistory() {
-    localStorage.setItem("history", historyList.innerHTML);
-}
-
-// function to square 
-function square(){
-    display.value = Number(display.value) ** 2;
-}
-
-// function to square root 
-function sqrt(){
-    display.value = Math.sqrt(Number(display.value));
-}
-
-// function to reciprocal
-function reciprocal(){
-    display.value = 1 / Number(display.value);
-}
-
-// function to implement the sin function 
-function sin(){
-    //  mapping of 90 degree to 1
-    display.value = 
-        Math.sin(Number(display.value) * Math.PI / 180);
-}
-
-
-// function to implement the cos function 
-function cos(){
-    display.value =
-        Math.cos(Number(display.value) * Math.PI / 180);
-}
-
-
-// function to implement the tan function 
-function tan(){
-    display.value =
-        Math.tan(Number(display.value) * Math.PI / 180);
-
-}
-
-// function to implement the log function 
-function log(){
-    display.value = Math.log10(Number(display.value));
-}
-
-// function to implement the Natural Log
-function ln(){
-    display.value = Math.log(Number(display.value));
-}
-
-// function to implement the factorial 
-function factorial(){
-    let n = Number(display.value);
-    let ans = 1;
-    for(let i = 2; i <= n; i++){
-        ans *= i;
-    }
-    display.value = ans;
-}
-
-//function to implement the clear History
-function clearHistory(){
-    historyList.innerHTML="";
-    localStorage.removeItem("history");
-}
-
-
-//function to calculate 
-function calculate(){
-    try{
-        //display.value = eval(display.value);
-        const expression = display.value;
-        const result = eval(expression);
-
-        display.value = result;
-
-        const li = document.createElement("li");
-
-        li.textContent = `${expression} = ${result}`;
-
-        historyList.prepend(li);
-        saveHistory();
-    }
-    catch{
-        display.value = "Error";
-    }
-}
-
-// Connecting the Keyboard to my Calculator..
-document.addEventListener("keydown", function (event) {
-    const key = event.key;
-    if ((key >= "0" && key <= "9") || "+-*/.%".includes(key)) {
-        append(key);
-    } 
-    else if (key === "Enter") {
-        event.preventDefault();
-        calculate();
-    } 
-    else if (key === "Backspace") {
-        deleteLast();
-    } 
-    else if (key === "Escape") {
-        clearDisplay();
-    }
-});
-
-// to load the history
-window.onload = function () {
-
-    const savedHistory = localStorage.getItem("history");
-
-    if (savedHistory) {
-        historyList.innerHTML = savedHistory;
+    const str = String(value);
+    if (str.includes(".") && !str.endsWith(".")) {
+      const [int, dec] = str.split(".");
+      const formatted = parseFloat(int).toLocaleString("en-US");
+      return dec !== undefined ? `${formatted}.${dec}` : formatted;
     }
 
-}
-
-// to have Dark/Light Theme
-const themeBtn = document.getElementById("theme-btn");
-
-themeBtn.addEventListener("click", () => {
-    document.body.classList.toggle("light");
-
-    if(document.body.classList.contains("light")){
-        themeBtn.textContent = "☀️ Light Mode";
-    }else{
-        themeBtn.textContent = "🌙 Dark Mode";
+    if (str.endsWith(".")) {
+      return `${parseFloat(str.slice(0, -1)).toLocaleString("en-US")}.`;
     }
-});
+
+    return num.toLocaleString("en-US", { maximumFractionDigits: 10 });
+  };
+
+  const updateDisplay = (flash = false) => {
+    if (flash) {
+      display.classList.add("updating");
+      requestAnimationFrame(() => {
+        display.textContent = formatDisplay(currentValue);
+        display.classList.toggle("error", currentValue === "Error");
+        setTimeout(() => display.classList.remove("updating"), 80);
+      });
+    } else {
+      display.textContent = formatDisplay(currentValue);
+      display.classList.toggle("error", currentValue === "Error");
+    }
+  };
+
+  const updateHistory = () => {
+    if (previousValue && operator) {
+      const opSymbol = { "+": "+", "-": "−", "*": "×", "/": "÷" }[operator] || operator;
+      historyEl.textContent = `${formatDisplay(previousValue)} ${opSymbol}`;
+    } else {
+      historyEl.textContent = "";
+    }
+  };
+
+  const clearAll = () => {
+    currentValue = "0";
+    previousValue = "";
+    operator = null;
+    shouldResetDisplay = false;
+    document.querySelectorAll(".key-op.active").forEach((k) => k.classList.remove("active"));
+    updateHistory();
+    updateDisplay();
+  };
+
+  const inputDigit = (digit) => {
+    if (currentValue === "Error") clearAll();
+    if (shouldResetDisplay) {
+      currentValue = digit;
+      shouldResetDisplay = false;
+    } else {
+      currentValue = currentValue === "0" ? digit : currentValue + digit;
+    }
+    if (currentValue.replace(".", "").length > 15) {
+      currentValue = currentValue.slice(0, -1);
+      return;
+    }
+    updateDisplay(true);
+  };
+
+  const inputDecimal = () => {
+    if (currentValue === "Error") clearAll();
+    if (shouldResetDisplay) {
+      currentValue = "0.";
+      shouldResetDisplay = false;
+    } else if (!currentValue.includes(".")) {
+      currentValue += ".";
+    }
+    updateDisplay(true);
+  };
+
+  const toggleSign = () => {
+    if (currentValue === "Error" || currentValue === "0") return;
+    currentValue = currentValue.startsWith("-")
+      ? currentValue.slice(1)
+      : "-" + currentValue;
+    updateDisplay(true);
+  };
+
+  const inputPercent = () => {
+    if (currentValue === "Error") return;
+    const num = parseFloat(currentValue) / 100;
+    currentValue = String(num);
+    updateDisplay(true);
+  };
+
+  const calculate = (a, b, op) => {
+    const x = parseFloat(a);
+    const y = parseFloat(b);
+    switch (op) {
+      case "+": return x + y;
+      case "-": return x - y;
+      case "*": return x * y;
+      case "/": return y === 0 ? NaN : x / y;
+      default: return y;
+    }
+  };
+
+  const setOperator = (op) => {
+    if (currentValue === "Error") return;
+
+    document.querySelectorAll(".key-op.active").forEach((k) => k.classList.remove("active"));
+
+    if (operator && !shouldResetDisplay) {
+      const result = calculate(previousValue, currentValue, operator);
+      if (!Number.isFinite(result)) {
+        currentValue = "Error";
+        previousValue = "";
+        operator = null;
+        updateHistory();
+        updateDisplay();
+        return;
+      }
+      currentValue = String(result);
+    }
+
+    previousValue = currentValue;
+    operator = op;
+    shouldResetDisplay = true;
+    updateHistory();
+
+    const opBtn = keypad.querySelector(`[data-action="operator"][data-value="${op}"]`);
+    opBtn?.classList.add("active");
+    updateDisplay(true);
+  };
+
+  const equals = () => {
+    if (!operator || currentValue === "Error") return;
+
+    const result = calculate(previousValue, currentValue, operator);
+    if (!Number.isFinite(result)) {
+      currentValue = "Error";
+      previousValue = "";
+      operator = null;
+      updateHistory();
+      updateDisplay();
+      return;
+    }
+
+    historyEl.textContent = `${formatDisplay(previousValue)} ${
+      { "+": "+", "-": "−", "*": "×", "/": "÷" }[operator]
+    } ${formatDisplay(currentValue)} =`;
+
+    currentValue = String(result);
+    previousValue = "";
+    operator = null;
+    shouldResetDisplay = true;
+    document.querySelectorAll(".key-op.active").forEach((k) => k.classList.remove("active"));
+    updateDisplay(true);
+  };
+
+  const ripple = (btn, e) => {
+    const rect = btn.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = (e?.clientX ?? rect.left + rect.width / 2) - rect.left - size / 2;
+    const y = (e?.clientY ?? rect.top + rect.height / 2) - rect.top - size / 2;
+
+    const el = document.createElement("span");
+    el.className = "ripple";
+    el.style.width = el.style.height = `${size}px`;
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+    btn.appendChild(el);
+    el.addEventListener("animationend", () => el.remove());
+  };
+
+  const flashKey = (btn) => {
+    btn.classList.add("pressed");
+    setTimeout(() => btn.classList.remove("pressed"), 120);
+  };
+
+  const handleAction = (action, value, btn, e) => {
+    ripple(btn, e);
+    flashKey(btn);
+
+    switch (action) {
+      case "clear": clearAll(); break;
+      case "toggle-sign": toggleSign(); break;
+      case "percent": inputPercent(); break;
+      case "digit": inputDigit(value); break;
+      case "decimal": inputDecimal(); break;
+      case "operator": setOperator(value); break;
+      case "equals": equals(); break;
+    }
+  };
+
+  keypad.addEventListener("click", (e) => {
+    const btn = e.target.closest(".key");
+    if (!btn) return;
+    const { action, value } = btn.dataset;
+    handleAction(action, value, btn, e);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    const map = {
+      "0": ["digit", "0"], "1": ["digit", "1"], "2": ["digit", "2"],
+      "3": ["digit", "3"], "4": ["digit", "4"], "5": ["digit", "5"],
+      "6": ["digit", "6"], "7": ["digit", "7"], "8": ["digit", "8"],
+      "9": ["digit", "9"], ".": ["decimal"], ",": ["decimal"],
+      "+": ["operator", "+"], "-": ["operator", "-"],
+      "*": ["operator", "*"], "/": ["operator", "/"],
+      "Enter": ["equals"], "=": ["equals"],
+      "Escape": ["clear"], "Backspace": ["clear"],
+      "%": ["percent"],
+    };
+
+    const entry = map[e.key];
+    if (!entry) return;
+    e.preventDefault();
+
+    const [action, value] = entry;
+    let selector = `[data-action="${action}"]`;
+    if (value) selector += `[data-value="${value}"]`;
+    const btn = keypad.querySelector(selector);
+    if (btn) handleAction(action, value, btn, null);
+  });
+
+  updateDisplay();
+})();
