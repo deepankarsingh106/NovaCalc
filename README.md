@@ -38,7 +38,7 @@
 - ❌ Error Handling (e.g., Division by Zero)
 - ♿ Accessibility with ARIA Labels
 
-  ---
+---
 
 ## 🛠️ Tech Stack
 
