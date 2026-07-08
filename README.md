@@ -7,5 +7,5 @@
 </p>
 
 <p align="center">
-  Clean UI • Keyboard Support • Glassmorphism • Responsive
+  A calculator featuring glassmorphism, keyboard shortcuts, and accessible design and focused on usability, responsiveness, and clean design.
 </p>
