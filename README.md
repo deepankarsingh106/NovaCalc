@@ -18,6 +18,7 @@
   ![Responsive](https://img.shields.io/badge/Responsive-Yes-success?style=for-the-badge)
 </p>
 
+  --- 
 
 <h1 align="center">
      Screenshots
